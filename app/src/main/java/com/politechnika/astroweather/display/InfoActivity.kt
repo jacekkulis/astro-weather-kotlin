@@ -12,9 +12,9 @@ import android.view.View
 
 class InfoActivity : AppCompatActivity() {
 
-    public var longitude: Double = 19.451377
-    public var latitude: Double = 51.7444712
-    public var refreshTime: Int = 15
+    var longitude: Double = 19.451377
+    var latitude: Double = 51.7444712
+    var refreshTime: Int = 15
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +34,7 @@ class InfoActivity : AppCompatActivity() {
         startActivity(Intent(this@InfoActivity, SettingsActivity::class.java))
     }
 
+
     private inner class MyPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
         override fun getItem(pos: Int): Fragment {
@@ -48,7 +49,6 @@ class InfoActivity : AppCompatActivity() {
             return 2
         }
     }
-
 
 
 }

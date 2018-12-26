@@ -1,25 +1,26 @@
 package com.politechnika.astroweather.display
 
-import android.support.v4.app.Fragment
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-
 import com.astrocalculator.AstroCalculator
 import com.astrocalculator.AstroDateTime
-
-import java.util.Calendar
-import java.util.Date
-import java.util.TimeZone
+import java.util.*
 
 class FragmentMoon : Fragment() {
     private var astroCalculator: AstroCalculator? = null
     private var infoActivity: InfoActivity? = null
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        inflater!!.inflate(R.layout.moon_fragment, container, false)
+        super.onCreateView(inflater, container, savedInstanceState)
+        return inflater!!.inflate(R.layout.moon_fragment, container, false)
+    }
+
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         infoActivity = this.activity as InfoActivity
 
         val location = AstroCalculator.Location(infoActivity!!.latitude, infoActivity!!.longitude)
@@ -53,8 +54,8 @@ class FragmentMoon : Fragment() {
         t.start()
 
 
-        return view
     }
+
 
     private fun setMoonrise(view: View, astroCalculator: AstroCalculator) {
         val astroDateTime = astroCalculator.moonInfo.moonrise

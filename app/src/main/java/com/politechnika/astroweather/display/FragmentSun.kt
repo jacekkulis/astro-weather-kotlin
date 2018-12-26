@@ -1,18 +1,14 @@
 package com.politechnika.astroweather.display
 
-import android.support.v4.app.Fragment
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-
 import com.astrocalculator.AstroCalculator
 import com.astrocalculator.AstroDateTime
-
-import java.util.Calendar
-import java.util.Date
-import java.util.TimeZone
+import java.util.*
 
 class FragmentSun : Fragment() {
     //private var view: View? = null
@@ -20,7 +16,13 @@ class FragmentSun : Fragment() {
     private var infoActivity: InfoActivity? = null
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        inflater!!.inflate(R.layout.sun_fragment, container, false)
+        super.onCreateView(inflater, container, savedInstanceState)
+        return inflater!!.inflate(R.layout.sun_fragment, container, false)
+    }
+
+
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         infoActivity = activity as InfoActivity
 
         val location = AstroCalculator.Location(infoActivity!!.latitude, infoActivity!!.longitude)
@@ -51,12 +53,10 @@ class FragmentSun : Fragment() {
             }
         }
         t.start()
-
-        return view
     }
 
+
     private fun setSunrise(view: View, astroCalculator: AstroCalculator) {
-        val now = Date()
         val astroDateTime = astroCalculator.sunInfo.sunrise
 
         (view.findViewById<View>(R.id.sun_TV_sunrise_value) as TextView).text = formatToTwoDigits(astroDateTime.hour) + ":" + formatToTwoDigits(astroDateTime.minute) + ":" + formatToTwoDigits(astroDateTime.second) + ", azymut: " + String.format("%.2f", astroCalculator.sunInfo.azimuthRise)

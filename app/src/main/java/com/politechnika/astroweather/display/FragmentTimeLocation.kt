@@ -1,29 +1,26 @@
 package com.politechnika.astroweather.display
 
-import android.app.Fragment
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-
 import com.astrocalculator.AstroCalculator
 import com.astrocalculator.AstroDateTime
-
 import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Date
-import java.util.TimeZone
+import java.util.*
 
 class FragmentTimeLocation : Fragment() {
     private var infoActivity: InfoActivity? = null
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle): View? {
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         infoActivity = this.activity as InfoActivity
 
-        inflater.inflate(R.layout.time_location_fragment, container, false)
         updateTimeField(view!!)
 
         val location = AstroCalculator.Location(infoActivity!!.latitude, infoActivity!!.longitude)
@@ -70,8 +67,11 @@ class FragmentTimeLocation : Fragment() {
         }
 
         t.start()
+    }
 
-        return view
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        super.onCreateView(inflater, container, savedInstanceState)
+        return inflater!!.inflate(R.layout.time_location_fragment, container, false)
     }
 
     private fun updateTimeField(view: View) {
